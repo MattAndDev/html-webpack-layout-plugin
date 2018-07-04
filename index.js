@@ -8,8 +8,7 @@ function HtmlWebpackLayoutPlugin (options) {}
 HtmlWebpackLayoutPlugin.prototype.apply = function (compiler) {
   var that = this;
   compiler.plugin('compilation', function(compilation) {
-
-    compilation.plugin('html-webpack-plugin-before-html-processing', function(htmlPluginData, callback) {
+    compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tapAsync('html-webpack-layout-plugin', (htmlPluginData, callback) => {
       htmlPluginData.html = that.addLayout( htmlPluginData.html , htmlPluginData.plugin.options);
       callback(null, htmlPluginData);
     });
